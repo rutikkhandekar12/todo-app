@@ -1,60 +1,70 @@
-
-
 async function signup() {
-    let warn = document.getElementById("warning");
-    let name = document.getElementById("name");
-    let email = document.getElementById("email").value;
-    let cpassword = document.getElementById("cpassword");
-    let passwordInput = document.getElementById("password");
-    
-    // window.email = email;
-    console.log("email in singup: ", email);
-    let password = passwordInput.value.trim();
-    cpassword = cpassword.value.trim();
-    name = name.value.trim();
+  let warn = document.getElementById("warning");
+  let name = document.getElementById("name");
+  let email = document.getElementById("email").value;
+  let cpassword = document.getElementById("cpassword");
+  let passwordInput = document.getElementById("password");
+
+  console.log("email in signup: ", email);
+  let password = passwordInput.value.trim();
+  cpassword = cpassword.value.trim();
+  name = name.value.trim();
+
+  // Clear previous warnings
+  warn.innerHTML = "";
+
+  // Function to create and append a warning message
+  const appendWarning = (message, color) => {
+    let warningMessage = document.createElement("div");
+    warningMessage.style.color = color;
+
+    let p = document.createElement("p");
+    p.textContent = message;
+    warningMessage.appendChild(p);
+    warn.appendChild(warningMessage);
+  };
+
+  // Check if the email and password are not empty
+  if (email === "" || password === "" || name === "" || cpassword === "") {
+    appendWarning("Please fill in all fields", "red");
+    return;
+  }
+  if (password !== cpassword) {
+    appendWarning("Passwords must be same.", "red");
+    return;
+  }
+  if (password.length < 6) {
+    appendWarning("Password must contain char greater than 6", "red");
+    return;
+  }
   
-    // Check if the email and password are not empty
-    if (email === "" || password === "" || name === "" || cpassword === "") {
-      warn.innerHTML = `<div style="color: red"><p>Please fill in all fields</p></div>`;
-      return;
-    }
-    if (password !== cpassword) {
-      warn.innerHTML = `<div style="color: red"><p>Passwords must be same.</p></div>`;
-      return;
-    }
-    if (password.length < 6) {
-      warn.innerHTML = `<div style="color: red"><p>Password must contain char greater than 6</p></div>`;
-      return;
-    }
-    try {
-      const response = await fetch("http://localhost:5000/signup", {
+  try {
+    const response = await fetch("http://localhost:5000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
     });
-  
+
     const data = await response.json();
-  
+
     if (response.ok) {
-      warn.innerHTML = `<div style="color: green"><p>${data.message}</p></div>`;
-  
+      appendWarning(data.message, "green");
+
       // Dispatch the custom event after successful signup
       const signupEvent = new CustomEvent("signupSuccess", { detail: { email } });
       document.dispatchEvent(signupEvent);
-      localStorage.setItem("User",email);
+      localStorage.setItem("User", email);
+
       // Redirect after successful signup
       setTimeout(() => {
         location.href = "../../main/Home/Home.html";
       }, 2000);
     } else {
-      warn.innerHTML = `<div style="color: red"><p>${data.message}</p></div>`;
+      appendWarning(data.message, "red");
     }
-    } catch (error) {
-      console.log(error);
-    }
-    
+  } catch (error) {
+    console.log(error);
   }
-  
-
+}

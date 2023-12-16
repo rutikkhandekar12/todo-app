@@ -1,4 +1,3 @@
-// -------------------------search-functionality---------------------------
 
 let searchInput = document.getElementById("search");
 

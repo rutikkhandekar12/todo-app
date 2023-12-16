@@ -9,8 +9,7 @@ const taskSchema = new mongoose.Schema({
     priority: String,
     stage: String
   });
-  
-  // tasks represents the collections in MongoDB
+
   let Task = mongoose.model('tasks', taskSchema); 
 
   module.exports = {Task}

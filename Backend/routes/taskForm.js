@@ -15,10 +15,8 @@ router.post('/taskform', async (req, res) => {
       stage
     });
   
-    // saving in MongoDB collection
     await newTask.save();
   
-    // sending response to frontend 
     res.status(200).json({ message: `Task added successfully!`});
   });
 

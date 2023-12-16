@@ -6,7 +6,7 @@ router.get('/tasks/:currentuser', async (req, res) => {
 
     const email = req.params.currentuser;
     try {
-      const tasks = await Task.find({email}); // Fetch tasks for the specific user
+      const tasks = await Task.find({email});
       res.status(200).json(tasks);
     } catch (error) {
         console.log(error);

@@ -1,5 +1,3 @@
-//--------------------------------------------Edit-functionality----------------------
-
 let edit = document.querySelector(".btn-submit-editedTask");
 let task = document.getElementById("task1");
 let desc = document.getElementById("desc1");
@@ -15,13 +13,11 @@ async function updatedTask(updatedData, id) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(updatedData), // updated Data as a payload
+    body: JSON.stringify(updatedData), 
   });
 
-  // const newRes = await response.json();
 
   if (response.ok) {
-    // Redirect after successful login
     setTimeout(() => {
       location.href = "../Home/Home.html";
     }, 1000);

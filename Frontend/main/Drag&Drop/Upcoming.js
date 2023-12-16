@@ -1,5 +1,3 @@
-//--------------------------drag-drop-functionality------------------------------
-
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
   }

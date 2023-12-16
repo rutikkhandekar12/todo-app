@@ -108,19 +108,16 @@ a:hover{
     width: 1.5rem;
 }
 
-.middel-of-task{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
-}
 
 
 .btn-of-task{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 155px;
+    justify-content: space-around;
+    margin-top: 12px;
+    margin-bottom: 7px;
 }
 
 .task-module{
@@ -143,15 +140,27 @@ a:hover{
     display: flex;
 }
 
-.todo-stage{
+.todo-stage, .progress-stage, .done-stage{
     height: 95%;
     overflow-y: scroll;
     overflow: auto;
 }
 
 ::-webkit-scrollbar {
-    display: none;
-}
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 
 .date-of-task{
     font-size: 0.7rem;
@@ -189,7 +198,6 @@ a:hover{
     text-decoration: line-through;
 }
 
-/* //----LogOut---------- */
 
 .btn-logout button{
     width: 14.5%;
