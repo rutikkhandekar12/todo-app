@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+//--------------------------------------------Edit-functionality----------------------
+
+>>>>>>> 98bf541 (Work)
 let edit = document.querySelector(".btn-submit-editedTask");
 let task = document.getElementById("task1");
 let desc = document.getElementById("desc1");
@@ -6,18 +11,32 @@ const formContainer = document.querySelector('.form-container')
 let task2;
 let desc2;
 
+<<<<<<< HEAD
 async function updatedTask(updatedData, id) {
+=======
+async function updatedTask() {
+>>>>>>> 98bf541 (Work)
   try{
   const response = await fetch(`${BASE_URL}/updateTask/${id}`, {
     method: "put",
     headers: {
       "Content-Type": "application/json",
     },
+<<<<<<< HEAD
     body: JSON.stringify(updatedData), 
   });
 
 
   if (response.ok) {
+=======
+    body: JSON.stringify(updatedData),
+  });
+
+  const newRes = await response.json();
+
+  if (response.ok) {
+    // Redirect after successful login
+>>>>>>> 98bf541 (Work)
     setTimeout(() => {
       location.href = "../Home/Home.html";
     }, 1000);
@@ -70,5 +89,10 @@ function handleEdit(id) {
     }catch(error){
       console.log(error);
     }
+<<<<<<< HEAD
+}
+=======
+>>>>>>> 98bf541 (Work)
 }
 }
+  module.exports = { updateTask, setFormValues };

@@ -1,4 +1,4 @@
-// let currentEmail;
+
 // const signup = async (req, res) => {
 //   try {
 //     const { email, password } = req.body; // distructuring username and password
