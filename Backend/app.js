@@ -1,21 +1,27 @@
 // ------------------------------------------Task-Database--------------------------------------
-const express = require('express'); 
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const cors = require('cors');
+const express = require("express");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const cors = require("cors");
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const PORT = 5000;
 app.use(express.json());
 app.use(cors()); // allow to diffent logins to use resources
-const login = require("./routes/login")
+const login = require("./routes/login");
 const signup = require("./routes/signup");
 const taskForm = require("./routes/taskForm");
 const tasks = require("./routes/tasks");
 const updateTask = require("./routes/updateTask");
 const deleteTask = require("./routes/deleteTask");
 
-mongoose.connect('mongodb://localhost:27017/Users', {useUnifiedTopology: true} );
+mongoose
+  .connect(
+    "mongodb+srv://rutikkhandekar:rutik123@cluster0.jrqnzjk.mongodb.net/Users"
+  )
+  .then(() => {
+    console.log("Connection established !!");
+  });
 
 app.use(login); // app.use() is use to mount middleware , login is middleware. it executes one by one
 app.use(signup);
