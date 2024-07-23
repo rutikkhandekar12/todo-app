@@ -7,7 +7,7 @@ let dayOfMonth = ("0" + date.getDate()).slice(-2);
 let currYear = date.getFullYear();
 let currMonth = date.getMonth();
 let taskModule = document.querySelector(".todo-stage");
-let BASE_URL = "http://localhost:5000";
+let BASE_URL = "https://todo-list-app-3.onrender.com";
 
 //time
 let hours = date.getHours();
