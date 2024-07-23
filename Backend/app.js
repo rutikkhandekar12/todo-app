@@ -1,11 +1,9 @@
-// ------------------------------------------Task-Database--------------------------------------
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
-const PORT = 5000;
 app.use(express.json());
 app.use(cors()); // allow to diffent logins to use resources
 const login = require("./routes/login");
@@ -14,14 +12,14 @@ const taskForm = require("./routes/taskForm");
 const tasks = require("./routes/tasks");
 const updateTask = require("./routes/updateTask");
 const deleteTask = require("./routes/deleteTask");
+require("dotenv").config();
 
-mongoose
-  .connect(
-    "mongodb+srv://rutikkhandekar:rutik123@cluster0.jrqnzjk.mongodb.net/Users"
-  )
-  .then(() => {
-    console.log("Connection established !!");
-  });
+const PORT = process.env.PORT;
+const DATABASE_URL = process.env.DATABASE_URL;
+
+mongoose.connect(DATABASE_URL).then(() => {
+  console.log("Connection established !!");
+});
 
 app.use(login); // app.use() is use to mount middleware , login is middleware. it executes one by one
 app.use(signup);
