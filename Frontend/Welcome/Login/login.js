@@ -1,3 +1,5 @@
+let BASE_URL = "https://todo-list-app-2.onrender.com";
+
 async function login() {
   const warn = document.getElementById("warning");
   const emailInput = document.getElementById("email1");
@@ -5,10 +7,8 @@ async function login() {
   const email = emailInput.value.trim(); 
   const password = passwordInput.value.trim();
 
-  // Clear previous warning messages
   warn.innerHTML = '';
 
-  // Check if the email and password are not empty
   if (email === "" || password === "") {
     const warningDiv = document.createElement('div');
     warningDiv.style.color = 'red';
@@ -20,7 +20,7 @@ async function login() {
   }
 
   try {
-    const response = await fetch("http://localhost:5000/login", {
+    const response = await fetch(`${BASE_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,23 +33,28 @@ async function login() {
     const messageDiv = document.createElement('div');
     const messageText = document.createElement('p');
 
-    if (response.ok) {
-      messageDiv.style.color = 'green';
-      messageText.textContent = data.message;
-      messageDiv.appendChild(messageText);
-      warn.appendChild(messageDiv);
-      
-      // Redirect after successful login
-      localStorage.setItem("User", email);
-      setTimeout(() => {
-        location.href = "../../main/Home/Home.html";
-      }, 2000);
-    } else {
-      messageDiv.style.color = 'red';
-      messageText.textContent = data.message;
-      messageDiv.appendChild(messageText);
-      warn.appendChild(messageDiv);
+    try {
+      if (response.ok) {
+        messageDiv.style.color = 'green';
+        messageText.textContent = data.message;
+        messageDiv.appendChild(messageText);
+        warn.appendChild(messageDiv);
+        
+        localStorage.setItem("User", email);
+
+        setTimeout(() => {
+          location.href = "../../main/Home/Home.html";
+        }, 2000);
+      } else {
+        messageDiv.style.color = 'red';
+        messageText.textContent = data.message;
+        messageDiv.appendChild(messageText);
+        warn.appendChild(messageDiv);
+      }
+    } catch (error) {
+      console.error(error);
     }
+   
   } catch (error) {
     console.log(error);
   }

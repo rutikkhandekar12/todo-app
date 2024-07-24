@@ -20,7 +20,7 @@ function handleTaskForm() {
         let desc = document.getElementById('desc1').value;
         let priority = document.getElementById('tasks-priority').value;
         let stage = "Upcoming";
-        // Check if the task, priority and desc are not empty
+       
         if (task === "" || desc === "") {
           warn.innerHTML = `<div style="color: red"><p>Please fill in all fields</p></div>`;
           return;

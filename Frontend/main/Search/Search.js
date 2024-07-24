@@ -13,7 +13,6 @@ function filterTasks(search) {
     let entireInfo = [];
     
     data.forEach((value, i) => {
-      // Check if the task contains the search text
       if (
        ( value.task.toLowerCase().includes(search) ||
         value.description.toLowerCase().includes(search)) && value.stage == "Upcoming"

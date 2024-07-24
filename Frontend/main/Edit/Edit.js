@@ -23,7 +23,7 @@ async function updatedTask(updatedData, id) {
     }, 1000);
   }
   } catch (error) {
-      console.log("Error", error);
+      console.error(error);
   }
 }
 
@@ -42,7 +42,7 @@ function handleEdit(id) {
     desc.value = desc2;
 
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
 

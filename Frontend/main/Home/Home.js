@@ -1,4 +1,4 @@
-const currentUser=localStorage.getItem('User')
+const currentUser = localStorage.getItem("User");
 const tasksCount = document.querySelector(".middle-section");
 let data;
 let date = new Date();
@@ -7,23 +7,19 @@ let dayOfMonth = ("0" + date.getDate()).slice(-2);
 let currYear = date.getFullYear();
 let currMonth = date.getMonth();
 let taskModule = document.querySelector(".todo-stage");
-let BASE_URL = "https://todo-list-app-3.onrender.com";
+let BASE_URL = "https://todo-list-app-2.onrender.com";
 
 //time
 let hours = date.getHours();
 let ampm = hours < 12 ? "am" : "pm";
 hours = hours % 12;
-hours = hours ? hours : 12; //hours 0 should be 12
+hours = hours ? hours : 12; 
 let minutes = date.getMinutes();
 minutes = minutes < 10 ? "0" + minutes : minutes;
 let time = hours + ":" + minutes + ampm;
 
 
-
-
-//-----------------------render-function----------------------------
-
-function render(value, entireInfo){
+function render(value, entireInfo, doneTime) {
   entireInfo.push(`
   <div id="${
     value._id
@@ -61,14 +57,13 @@ function render(value, entireInfo){
   `);
   return entireInfo;
 }
-// ------------------------------------------todo-functionality-------------------------------
 
 async function todayTask() {
   try {
     const response = await fetch(`${BASE_URL}/tasks/${currentUser}`);
     data = await response.json();
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error(error);
   }
   let count = 0;
   let entireInfo = [];
@@ -79,16 +74,13 @@ async function todayTask() {
       entireInfo = render(value, entireInfo);
     }
   });
-    taskModule.innerHTML = entireInfo.join("");
-    tasksCount.innerHTML = ` <div>
+  taskModule.innerHTML = entireInfo.join("");
+  tasksCount.innerHTML = ` <div>
     <p>All tasks(${count} tasks)</p>
    </div>
   `;
-
 }
-todayTask()
-
-// ----------------------------important-tasks-shortlist------------------------------------
+todayTask();
 
 function importantTask() {
   let count = 0;
@@ -99,14 +91,12 @@ function importantTask() {
       entireInfo = render(value, entireInfo);
     }
   });
-    taskModule.innerHTML = entireInfo.join("");
-    tasksCount.innerHTML = ` <div>
+  taskModule.innerHTML = entireInfo.join("");
+  tasksCount.innerHTML = ` <div>
     <p>All tasks(${count} tasks)</p>
   </div>
   `;
 }
-
-// ------------------------------------------allTask-module---------------------------------------
 
 function allTask() {
   let count = 0;
@@ -117,11 +107,9 @@ function allTask() {
       entireInfo = render(value, entireInfo);
     }
   });
-      taskModule.innerHTML = entireInfo.join("");
-      tasksCount.innerHTML = ` <div>
+  taskModule.innerHTML = entireInfo.join("");
+  tasksCount.innerHTML = ` <div>
       <p>All tasks(${count} tasks)</p>
     </div>
     `;
 }
-
-
